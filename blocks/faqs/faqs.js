@@ -1,7 +1,4 @@
 export default function decorate(block) {
-    const wrapper = block.parentElement;
-    const container = wrapper.parentElement;
-    
     const faq_rows = Array.from(block.children);
     const faqs=[];
     //console.log(faq_rows);
@@ -10,13 +7,12 @@ export default function decorate(block) {
     const faq_cell=row.innerText.split('\n');
     const faq_question=faq_cell[1];
     const faq_answer=faq_cell[2];
-
     faqs.push({faq_question,faq_answer});
 
     });
 
     block.innerHTML = '';
-    faqs.forEach((faq,i)=>{
+    faqs.forEach((faq)=>{
         const { faq_question, faq_answer } = faq;
 
         const accordion = document.createElement('div');
@@ -34,7 +30,7 @@ export default function decorate(block) {
         accordion.append(answerDiv);
         answerDiv.innerHTML = faq_answer;
 
-  
+
     });
     
     var acc = document.getElementsByClassName("faq-question");
@@ -50,9 +46,8 @@ export default function decorate(block) {
           panel.style.display = "block";
         }
       });
-    }
-        
-  };
+    }     
+  }
 
 
 
