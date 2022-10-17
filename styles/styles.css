@@ -226,6 +226,12 @@ main img {
   }
 }
 
+main .highlight-orange
+{
+  background-color:#D22D4C;
+
+}
+
 /* progressive section appearance */
 main .section[data-section-status='loading'],
 main .section[data-section-status='initialized'] {
@@ -235,3 +241,5 @@ main .section[data-section-status='initialized'] {
 main .section.highlight {
   background-color: var(--highlight-background-color);
 }
+
+
