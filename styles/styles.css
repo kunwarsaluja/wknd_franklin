@@ -232,6 +232,13 @@ main .highlight-orange
 
 }
 
+main .separator
+{
+  margin: auto;
+  width: 60%;
+  border-top: 5px solid #cccccc;
+}
+
 /* progressive section appearance */
 main .section[data-section-status='loading'],
 main .section[data-section-status='initialized'] {
