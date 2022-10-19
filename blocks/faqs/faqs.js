@@ -4,7 +4,7 @@ export default function decorate(block) {
   block.innerHTML = '';
 
   faqRows.forEach((row) => {
-    const faqCell = row.innerText.split('\n');
+    const faqCell = row.innerHTML.split('\n');
     const faqQuestion = faqCell[1];
     const faqAnswer = faqCell[2];
     faqs.push({ faqQuestion, faqAnswer });
