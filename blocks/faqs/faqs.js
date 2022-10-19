@@ -28,7 +28,7 @@ export default function decorate(block) {
   * @param {element} el element to be constructed
   * @param {string} classname class name to be added to the element
   * @param {element} appendtarget dom element target this element will be appended to
-  * @param {boolean} doinner determins if the element has innerHtml or not.  
+  * @param {boolean} doinner determines if the element should have innerHtml appended to it or not.  
   * @param {html} doinner HTML to append in the created element
  */
 function domConstructor(el,classname,appendtarget,doinner,innerhtml){
