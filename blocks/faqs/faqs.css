@@ -1,4 +1,4 @@
-.faq-question {
+button.faq-question {
     background-color: #eee;
     color: #444;
     cursor: pointer;
@@ -10,13 +10,8 @@
     font-size: 15px;
     transition: 0.4s;
   }
-  
-  .faq-question:hover{
-    background-color:#136ff6;
-    color:#eee;
-  }
 
-  .faq-question:active,.faq-question:focus{
+  button.faq-question:hover,button.faq-question.active{
     background-color:#136ff6;
     color:#eee;
   }

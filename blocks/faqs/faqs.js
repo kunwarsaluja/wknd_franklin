@@ -43,39 +43,15 @@ function domConstructor(el,classname,appendtarget,doinner,innerhtml){
 }
 
 /**
-  * Binds the click action, calls addClass and clearClass functions.  Called from the decorate function.
+  * Binds the click action, toggles decorative classes.  Called from the decorate function.
   * 
   * @param {element} acc element array 
  */
 function bindClick(acc){
   for (let i = 0; i < acc.length; i++) {
     acc[i].addEventListener('click', function () {
-      clearClass(acc,'active');
-      addClass(this,'active');
+      this.classList.toggle('active');
+      this.nextElementSibling.classList.toggle('active');
     });
   }
-}
-
-/**
-  * Adds classes to show the clicked element, called from bindClick
-  * 
-  * @param {element} acc element array 
-  * @param {string} classname class name to be added to the element 
- */
-function addClass(acc,classname){
-  acc.classList.add(classname);
-  acc.nextElementSibling.classList.add(classname);
-}
-
-/**
-  * removes classes to hide the clicked element, called from bindClick
-  * 
-  * @param {element} acc element array 
-  * @param {string} classname class name to be added to the element 
- */
-function clearClass(acc,classname){
-  [].forEach.call(acc, function(el) {
-    el.classList.remove(classname);
-    el.nextElementSibling.classList.remove(classname);
-  });
 }
