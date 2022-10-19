@@ -18,6 +18,7 @@ button.faq-question {
 
   .faq-answer {
     padding: 0 18px;
+    margin: 0 20px;
     display: none;
     background-color: white;
     overflow: hidden;
