@@ -1,7 +1,6 @@
 export default function decorate(block) {
   const faqRows = Array.from(block.children);
   const faqs = [];
-  // console.log(faq_rows);
 
   faqRows.forEach((row) => {
     const faqCell = row.innerText.split('\n');
@@ -13,36 +12,43 @@ export default function decorate(block) {
   block.innerHTML = '';
   faqs.forEach((faq) => {
     const { faqQuestion, faqAnswer } = faq;
-
-    const accordion = document.createElement('div');
-    accordion.className = 'faq-accordion';
-    block.append(accordion);
-
-    const questionDiv = document.createElement('button');
-    questionDiv.className = 'faq-question';
-    accordion.append(questionDiv);
-    questionDiv.innerHTML = faqQuestion;
-
-    const answerDiv = document.createElement('div');
-    answerDiv.className = 'faq-answer';
-    accordion.append(answerDiv);
-    answerDiv.innerHTML = faqAnswer;
+    const accordion = domConstructor('div','faq-accordion',block,false,'');
+    domConstructor('button','faq-question',accordion,true,faqQuestion);
+    domConstructor('div','faq-answer',accordion,true,faqAnswer);
   });
 
   const acc = document.getElementsByClassName('faq-question');
-  let i;
+  bindClick(acc);
+}
 
-  // eslint-disable-next-line no-plusplus
-  for (i = 0; i < acc.length; i++) {
-    // eslint-disable-next-line func-names
+function domConstructor(el,classname,appendtarget,doinner,innerhtml){
+  var thiselement = document.createElement(el);
+  thiselement.className = classname;
+  appendtarget.append(thiselement);
+  if(doinner){
+    thiselement.innerHTML = innerhtml;
+  }  else {
+    return appendtarget;
+  }
+}
+
+function bindClick(acc){
+  for (let i = 0; i < acc.length; i++) {
     acc[i].addEventListener('click', function () {
-      this.classList.toggle('active');
-      const faqAnswer = this.nextElementSibling;
-      if (faqAnswer.style.display === 'block') {
-        faqAnswer.style.display = 'none';
-      } else {
-        faqAnswer.style.display = 'block';
-      }
+      clearClass(acc,'active');
+      addClass(this,'active');
     });
   }
+}
+
+function addClass(acc,classname){
+  acc.classList.add(classname);
+  acc.nextElementSibling.classList.add(classname);
+}
+
+function clearClass(acc,classname){
+  [].forEach.call(acc, function(el) {
+    el.classList.remove(classname);
+    el.nextElementSibling.classList.remove(classname);
+  });
 }

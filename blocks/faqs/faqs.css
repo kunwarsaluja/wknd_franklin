@@ -11,13 +11,24 @@
     transition: 0.4s;
   }
   
-  .active, .faq-question:hover {
-    background-color: #ccc; 
+  .faq-question:hover{
+    background-color:#136ff6;
+    color:#eee;
   }
-  
+
+  .faq-question:active,.faq-question:focus{
+    background-color:#136ff6;
+    color:#eee;
+  }
+
   .faq-answer {
     padding: 0 18px;
     display: none;
     background-color: white;
     overflow: hidden;
+    border-left:solid 1px #ccc;
+  }
+
+  .faq-answer.active {
+    display:block;
   }
