@@ -1,48 +1,57 @@
+/* eslint-disable no-plusplus */
+/**
+  * Constructs dom elements for this block. Called from the decorate funciton.
+  * Returns an element if doinner is FALSE.
+  *
+  * @param {element} el element to be constructed
+  * @param {string} classname class name to be added to the element
+  * @param {element} appendtarget dom element target this element will be appended to
+  * @param {boolean} doinner determines if the element should have innerHtml appended to it or not.
+  * @param {html} doinner HTML to append in the created element
+ */
+// eslint-disable-next-line consistent-return
+function domConstructor(el, classname, appendtarget, doinner, innerhtml) {
+  const thiselement = document.createElement(el);
+  thiselement.className = classname;
+  appendtarget.append(thiselement);
+  if (doinner) {
+    thiselement.innerHTML = innerhtml;
+  } else {
+    return appendtarget;
+  }
+}
+
+/**
+  * Binds the click action, toggles decorative classes.  Called from the decorate function.
+  *
+  * @param {element} acc element array
+ */
+function bindClick(acc) {
+  for (let i = 0; i < acc.length; i++) {
+    acc[i].addEventListener('click', function a() {
+      this.classList.toggle('active');
+      this.nextElementSibling.classList.toggle('active');
+    });
+  }
+}
+
 export default function decorate(block) {
   const faqRows = Array.from(block.children);
   const faqs = [];
-  // console.log(faq_rows);
+  block.innerHTML = '';
 
   faqRows.forEach((row) => {
-    const faqCell = row.innerText.split('\n');
-    const faqQuestion = faqCell[1];
-    const faqAnswer = faqCell[2];
+    const faqQuestion = [...row.children][0].innerHTML;
+    const faqAnswer = [...row.children][1].innerHTML;
     faqs.push({ faqQuestion, faqAnswer });
   });
 
-  block.innerHTML = '';
   faqs.forEach((faq) => {
     const { faqQuestion, faqAnswer } = faq;
-
-    const accordion = document.createElement('div');
-    accordion.className = 'faq-accordion';
-    block.append(accordion);
-
-    const questionDiv = document.createElement('button');
-    questionDiv.className = 'faq-question';
-    accordion.append(questionDiv);
-    questionDiv.innerHTML = faqQuestion;
-
-    const answerDiv = document.createElement('div');
-    answerDiv.className = 'faq-answer';
-    accordion.append(answerDiv);
-    answerDiv.innerHTML = faqAnswer;
+    const accordion = domConstructor('div', 'faq-accordion', block, false, '');
+    domConstructor('button', 'faq-question', accordion, true, faqQuestion);
+    domConstructor('div', 'faq-answer', accordion, true, faqAnswer);
   });
 
-  const acc = document.getElementsByClassName('faq-question');
-  let i;
-
-  // eslint-disable-next-line no-plusplus
-  for (i = 0; i < acc.length; i++) {
-    // eslint-disable-next-line func-names
-    acc[i].addEventListener('click', function () {
-      this.classList.toggle('active');
-      const faqAnswer = this.nextElementSibling;
-      if (faqAnswer.style.display === 'block') {
-        faqAnswer.style.display = 'none';
-      } else {
-        faqAnswer.style.display = 'block';
-      }
-    });
-  }
+  bindClick(document.getElementsByClassName('faq-question'));
 }
