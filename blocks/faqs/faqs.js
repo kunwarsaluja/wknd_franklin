@@ -1,6 +1,7 @@
 export default function decorate(block) {
   const faqRows = Array.from(block.children);
   const faqs = [];
+  block.innerHTML = '';
 
   faqRows.forEach((row) => {
     const faqCell = row.innerText.split('\n');
@@ -9,7 +10,6 @@ export default function decorate(block) {
     faqs.push({ faqQuestion, faqAnswer });
   });
 
-  block.innerHTML = '';
   faqs.forEach((faq) => {
     const { faqQuestion, faqAnswer } = faq;
     const accordion = domConstructor('div','faq-accordion',block,false,'');
@@ -17,8 +17,7 @@ export default function decorate(block) {
     domConstructor('div','faq-answer',accordion,true,faqAnswer);
   });
 
-  const acc = document.getElementsByClassName('faq-question');
-  bindClick(acc);
+  bindClick(document.getElementsByClassName('faq-question'));
 }
 
 /**
