@@ -4,9 +4,8 @@ export default function decorate(block) {
   block.innerHTML = '';
 
   faqRows.forEach((row) => {
-    const faqCell = row.innerHTML.split('\n');
-    const faqQuestion = faqCell[1];
-    const faqAnswer = faqCell[2];
+    const faqQuestion = [...row.children][0].innerHTML;
+    const faqAnswer = [...row.children][1].innerHTML;
     faqs.push({ faqQuestion, faqAnswer });
   });
 
@@ -14,6 +13,7 @@ export default function decorate(block) {
     const { faqQuestion, faqAnswer } = faq;
     const accordion = domConstructor('div','faq-accordion',block,false,'');
     domConstructor('button','faq-question',accordion,true,faqQuestion);
+
     domConstructor('div','faq-answer',accordion,true,faqAnswer);
   });
 
