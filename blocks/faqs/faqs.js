@@ -13,7 +13,6 @@ export default function decorate(block) {
     const { faqQuestion, faqAnswer } = faq;
     const accordion = domConstructor('div','faq-accordion',block,false,'');
     domConstructor('button','faq-question',accordion,true,faqQuestion);
-
     domConstructor('div','faq-answer',accordion,true,faqAnswer);
   });
 
@@ -48,7 +47,7 @@ function domConstructor(el,classname,appendtarget,doinner,innerhtml){
  */
 function bindClick(acc){
   for (let i = 0; i < acc.length; i++) {
-    acc[i].addEventListener('click', function () {
+    acc[i].addEventListener('click', function a () {
       this.classList.toggle('active');
       this.nextElementSibling.classList.toggle('active');
     });
