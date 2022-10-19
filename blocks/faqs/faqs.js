@@ -1,24 +1,3 @@
-export default function decorate(block) {
-  const faqRows = Array.from(block.children);
-  const faqs = [];
-  block.innerHTML = '';
-
-  faqRows.forEach((row) => {
-    const faqQuestion = [...row.children][0].innerHTML;
-    const faqAnswer = [...row.children][1].innerHTML;
-    faqs.push({ faqQuestion, faqAnswer });
-  });
-
-  faqs.forEach((faq) => {
-    const { faqQuestion, faqAnswer } = faq;
-    const accordion = domConstructor('div','faq-accordion',block,false,'');
-    domConstructor('button','faq-question',accordion,true,faqQuestion);
-    domConstructor('div','faq-answer',accordion,true,faqAnswer);
-  });
-
-  bindClick(document.getElementsByClassName('faq-question'));
-}
-
 /**
   * Constructs dom elements for this block. Called from the decorate funciton.
   * Returns an element if doinner is FALSE.
@@ -52,4 +31,25 @@ function bindClick(acc){
       this.nextElementSibling.classList.toggle('active');
     });
   }
+}
+
+export default function decorate(block) {
+  const faqRows = Array.from(block.children);
+  const faqs = [];
+  block.innerHTML = '';
+
+  faqRows.forEach((row) => {
+    const faqQuestion = [...row.children][0].innerHTML;
+    const faqAnswer = [...row.children][1].innerHTML;
+    faqs.push({ faqQuestion, faqAnswer });
+  });
+
+  faqs.forEach((faq) => {
+    const { faqQuestion, faqAnswer } = faq;
+    const accordion = domConstructor('div','faq-accordion',block,false,'');
+    domConstructor('button','faq-question',accordion,true,faqQuestion);
+    domConstructor('div','faq-answer',accordion,true,faqAnswer);
+  });
+
+  bindClick(document.getElementsByClassName('faq-question'));
 }
