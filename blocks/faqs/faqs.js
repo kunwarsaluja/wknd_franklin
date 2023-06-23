@@ -1,6 +1,5 @@
 export default function decorate(block) {
   const faqRows = [...block.children];
-
   block.classList.add('faq-accordion');
   faqRows.forEach((row) => {
     const faqQuestion = [...row.children][0];
